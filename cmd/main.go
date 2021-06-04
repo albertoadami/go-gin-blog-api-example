@@ -1,13 +1,17 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/albertoadami/go-gin-blog-api-example/pkg/rest"
+	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
+)
 
 func main() {
+	const port = "8080"
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run()
+
+	rest.InitRouter(r)
+
+	log.Info("Service starting on port " + port)
+	r.Run(":" + port)
 }

@@ -3,6 +3,8 @@ FROM golang:alpine as builder
 
 # Enable go modules
 ENV GO111MODULE=on
+# Enable release mode
+ENV GIN_MODE=release
 
 # Install bash. (alpine image does not have bash in it)
 RUN apk update && apk add git && apk add bash
