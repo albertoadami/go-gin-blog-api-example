@@ -2,7 +2,6 @@ package database
 
 import (
 	"fmt"
-	"net/url"
 
 	"gorm.io/driver/postgres"
 
@@ -14,14 +13,9 @@ import (
 
 func InitDb(config config.Config) *gorm.DB {
 
-	dsn := url.URL{
-		User:     url.UserPassword(config.User, config.Password),
-		Scheme:   "postgres",
-		Host:     fmt.Sprintf("%s:%d", config.Host, config.Port),
-		Path:     config.Name,
-		RawQuery: (&url.Values{"sslmode": []string{"disable"}}).Encode(),
-	}
-	db, err := gorm.Open(postgres.Open(dsn.String()), &gorm.Config{})
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable", config.Host, config.User, config.Password, config.Name, config.Port)
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Error("Error connecting to database : error=%v", err)

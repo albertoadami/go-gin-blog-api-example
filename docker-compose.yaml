@@ -5,12 +5,10 @@ networks:
 services:
     postgres:
         image: postgres:latest
-        volumes:
-            - ./data/db:/var/lib/postgresql/data
         networks: 
             - default
         environment:
-            - POSTGRES_DB=blog_api
+            - POSTGRES_DB=blog-api
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
         ports: 
@@ -26,8 +24,8 @@ services:
         ports:
             - "8080:8080"
         depends_on:
-            - postgres
-        condition: service_healthy
+            postgres:
+                condition: service_healthy
         networks: 
             - default
         environment: 
