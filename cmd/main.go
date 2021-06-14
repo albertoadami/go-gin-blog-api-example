@@ -21,6 +21,7 @@ func main() {
 
 	log.Info("Trying to connect to database...")
 	database.InitDb(config)
+	database.MigrateDb()
 
 	rest.InitRouter(r)
 

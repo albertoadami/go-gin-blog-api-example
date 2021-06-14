@@ -19,7 +19,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	id, error := service.AddUser(createUserRequest)
+	id, error := service.CreateUser(createUserRequest)
 
 	if error != nil {
 		log.Info(fmt.Sprintf("The user with email %s exists already", createUserRequest.Email))
