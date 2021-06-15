@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/albertoadami/go-gin-blog-api-example/pkg/config"
-	"github.com/albertoadami/go-gin-blog-api-example/pkg/database"
-	"github.com/albertoadami/go-gin-blog-api-example/pkg/rest"
+	"github.com/albertoadami/go-gin-blog-api-example/config"
+	"github.com/albertoadami/go-gin-blog-api-example/database"
+	"github.com/albertoadami/go-gin-blog-api-example/rest"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
@@ -15,7 +15,7 @@ func main() {
 	r := gin.Default()
 
 	//read the config
-	var config = readConfig("config", "config")
+	var config = readConfig("config", ".")
 
 	log.Info("here the config", config)
 

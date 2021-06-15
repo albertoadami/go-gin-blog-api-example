@@ -1,7 +1,7 @@
 package rest
 
 import (
-	v1 "github.com/albertoadami/go-gin-blog-api-example/pkg/rest/api/v1"
+	v1 "github.com/albertoadami/go-gin-blog-api-example/rest/api/v1"
 	"github.com/gin-gonic/gin"
 )
 

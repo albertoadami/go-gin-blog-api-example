@@ -7,8 +7,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/albertoadami/go-gin-blog-api-example/pkg/config"
-	"github.com/albertoadami/go-gin-blog-api-example/pkg/models"
+	"github.com/albertoadami/go-gin-blog-api-example/config"
+	"github.com/albertoadami/go-gin-blog-api-example/models"
 	"gorm.io/gorm"
 )
 
@@ -21,8 +21,7 @@ func InitDb(config config.Config) {
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		log.Fatal("Error connecting to database : error=%v", err)
-		return
+		panic(fmt.Sprintf("Error connecting to database : error=%v", err))
 	}
 
 	log.Info("Connected to database ", config.Name)

@@ -1,13 +1,13 @@
 package v1
 
 import (
-	"fmt"
 	"net/http"
 
-	json "github.com/albertoadami/go-gin-blog-api-example/pkg/rest/json"
-	service "github.com/albertoadami/go-gin-blog-api-example/pkg/service"
+	"github.com/albertoadami/go-gin-blog-api-example/errors"
+	"github.com/albertoadami/go-gin-blog-api-example/rest/json"
+	"github.com/albertoadami/go-gin-blog-api-example/service"
+
 	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
 )
 
 func CreateUser(c *gin.Context) {
@@ -22,8 +22,12 @@ func CreateUser(c *gin.Context) {
 	id, error := service.CreateUser(createUserRequest)
 
 	if error != nil {
-		log.Info(fmt.Sprintf("The user with email %s exists already", createUserRequest.Email))
-		c.Writer.WriteHeader(409)
+		switch error.(type) {
+		case errors.EmailAlreadyInUseError:
+			c.Writer.WriteHeader(409)
+		default:
+			c.Writer.WriteHeader(500)
+		}
 	} else {
 		c.JSON(http.StatusCreated, gin.H{"id": id})
 	}
