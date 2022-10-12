@@ -20,5 +20,7 @@ jobs:
 
     - name: Compile
       run: make build
-    - name: Build Docker images
+    - name: Run Test
+      run: go test ./test/...
+    - name: Build Docker Image
       run: docker build -t go-gin-blog-api-example:latest .
